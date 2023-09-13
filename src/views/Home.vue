@@ -1,51 +1,105 @@
 <template>
   <div>
     <div class="ui main container">
-      <!-- 基本的なコンテンツはここに記載する -->
-      <div class="ui segment">
-      </div>
+      <ul class="one ui column row">
+        <template v-for="(item, index) in dairies" :key="index">
+          <div class="ui card fluid">
+            <div class="content">
+              <h2 class="header">
+                {{ item.Title }}
+                <span class="ui right floated">{{ item.Food }}</span>
+              </h2>
+              <span class="meta">{{ item.Text }}</span>
+              <button @click="ChangeFavIcon(item.isLike)" class="ui labeled button right floated" tabindex="0" v-if="!item.isLike">
+                <div class="ui button" id="generated-id-1694596057258-19vo88pbi">
+                  <i class="heart icon"></i> いいね
+                </div>
+              </button>
+              <button @click="ChangeFavIcon(item.isLike)" class="ui labeled button right floated" tabindex="0" v-if="item.isLike">
+                <div class="ui red button" id="generated-id-1694596057258-pfvbr7cca">
+                  <i class="heart icon"></i> いいね
+                </div>
+              </button>
+            </div>
+            <div class="content">
+              <span class="meta right floated">{{ item.UpdateTime }}</span>
+            </div>
+          </div>
+        </template>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-  // import { baseUrl } from '@/assets/config.js';
+// APIのbaseUrlをインポートする
+import { baseUrl } from "@/assets/config.js";
 
-  // ホーム画面
-  export default {
-    name: 'Home',
+export default {
+  name: "Template",
 
-    components: {},
-
-    data() {
-      // Vue.jsで使う変数はここに記述する
-      return {
-        post: {
-          text: null,
-          category: null,
+  data() {
+    return {
+      dairies: [
+        {
+          Title: "hogehoge",
+          Food: "トマト",
+          Text:"トマトおいしい",
+          isLike:false,
+          UpdateTime: "2023/09/13"
+        },  
+        {
+          Title: "foo",
+          Food: "ほうれん草",
+          Text:"ほうれん草おいしい",
+          isLike:true,
+          UpdateTime: "2023/09/12"
         },
-        search: {
-          userId: null,
-          category: null,
-          start: null,
-          end: null,
-        },
-        articles: [],
-        iam: null,
-      };
+      ],  
+    };
+  },
+
+  computed: {},
+
+  methods: {
+    async getRequestTemplate() {
+      // headerを指定する
+      const headers = { Authorization: "mtiToken" };
+
+      // APIをGETする
+      // データを送受信する処理
+      try {
+        /* global fetch */
+        const res = await fetch(baseUrl + "/dairies", {
+          method: "GET",
+          headers,
+        });
+
+        const text = await res.text();
+        const jsonData = text ? JSON.parse(text) : {};
+
+        // fetchではネットワークエラー以外のエラーはthrowされないため、明示的にthrowする
+        if (!res.ok) {
+          const errorMessage =
+            jsonData.message ?? "エラーメッセージがありません";
+          throw new Error(errorMessage);
+        }
+
+        // 成功時の処理
+        console.log(jsonData);
+      } catch (e) {
+        console.error(e);
+        // エラー時の処理
+      }
     },
-    computed: {},
-
-    methods: {
-      // isMyArticle(id) {}, // 自分の記事かどうかを判定する
-      // async getArticles() {}, // 記事一覧を取得する
-      // async postArticle() {}, // 記事を作成する
-      // async getSearchedArticles() {}, // 記事を検索する
-      // async deleteArticle(article) {}, // 記事を削除する
-      // convertToLocaleString(timestamp) {} // timestampをLocaleDateStringに変換する
+    
+    ChangeFavIcon(i)
+    {
+      this.i = !this.i;
+      console.log(i);
     }
-  }
+  },
+};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
