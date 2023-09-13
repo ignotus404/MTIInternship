@@ -18,7 +18,7 @@ exports.handler = async (event, context) =>
     body: JSON.stringify({ message: "" }),
   };
   
-  if(event.headers.authorization !== "mtitoken")
+  if(event.headers.authorization !== "mtiToken")
   {
     response.statusCode = 401;
     response.body = JSON.stringify({
