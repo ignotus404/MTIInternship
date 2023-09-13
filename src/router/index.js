@@ -4,6 +4,8 @@ import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import User from '../views/User.vue'
 import DiaryViewer from '../views/DiaryViewer.vue'
+import UnderTab from '../components/UnderTab.vue'
+
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -54,6 +56,15 @@ const router = createRouter({
         title: 'diaries'
       }
     }
+    //下タブ
+    {
+      path: '/undertab',
+      name: 'UnderTab',
+      component: UnderTab,
+      meta: {
+        title: 'UnderTab'
+      }
+    },
   ]
 })
 
