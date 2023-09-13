@@ -36,7 +36,7 @@
 import { baseUrl } from "@/assets/config.js";
 
 export default {
-  name: "Template",
+  name: "DailyViewer",
 
   data() {
     return {
