@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <Menu />
+    <Header />
     <router-view/>
   </div>
 </template>
 
 <script>
 import { RouterView } from 'vue-router';
-import Menu from '@/components/Menu.vue';
+import Header from '@/components/Header.vue';
 
 export default {
   name: 'App',
   components: {
-    Menu
+    Header
   },
 }
 </script>
