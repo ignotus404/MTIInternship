@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import User from '../views/User.vue'
+import DiaryViewer from '../views/DiaryViewer.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,16 @@ const router = createRouter({
         title: 'User'
       }
     },
+    //日記一覧画面
+    {
+      path:'/diaries',
+      name:'diaries',
+      component: DiaryViewer,
+      meta: 
+      {
+        title: 'diaries'
+      }
+    }
   ]
 })
 

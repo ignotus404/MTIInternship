@@ -1,18 +1,31 @@
 <template>
   <div>
     <div class="ui main container">
-      <ul class="ui column grid">
-        <li class="column">
+      <ul class="one ui column row">
+        <template v-for="(item, index) in dairies" :key="index">
           <div class="ui card fluid">
             <div class="content">
               <h2 class="header">
-                Title
-                <span class="ui green label">材料</span>
+                {{ item.Title }}
+                <span class="ui right floated">{{ item.Food }}</span>
               </h2>
-              <span class="meta ui stackable grid">TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText</span>
+              <span class="meta">{{ item.Text }}</span>
+              <button @click="ChangeFavIcon(item.isLike, index)" class="ui labeled button right floated" tabindex="0" v-if="!item.isLike">
+                <div class="ui button" id="generated-id-1694596057258-19vo88pbi">
+                  <i class="heart icon"></i> いいね
+                </div>
+              </button>
+              <button @click="ChangeFavIcon(item.isLike, index)" class="ui labeled button right floated" tabindex="0" v-if="item.isLike">
+                <div class="ui red button" id="generated-id-1694596057258-pfvbr7cca">
+                  <i class="heart icon"></i> いいね
+                </div>
+              </button>
+            </div>
+            <div class="content">
+              <span class="meta right floated">{{ item.UpdateTime }}</span>
             </div>
           </div>
-        </li>
+        </template>
       </ul>
     </div>
   </div>
@@ -23,10 +36,27 @@
 import { baseUrl } from "@/assets/config.js";
 
 export default {
-  name: "DiaryViewer",
+  name: "DailyViewer",
 
   data() {
-    return {};
+    return {
+      dairies: [
+        {
+          Title: "hogehoge",
+          Food: "トマト",
+          Text:"トマトおいしい",
+          isLike:false,
+          UpdateTime: "2023/09/13"
+        },  
+        {
+          Title: "foo",
+          Food: "ほうれん草",
+          Text:"ほうれん草おいしい",
+          isLike:true,
+          UpdateTime: "2023/09/12"
+        },
+      ],  
+    };
   },
 
   computed: {},
@@ -62,6 +92,16 @@ export default {
         // エラー時の処理
       }
     },
+    
+    ChangeFavIcon(bool, index)
+    {
+      this.dairies[index].isLike = !this.dairies[index].isLike;
+      if(this.dairies[index].isLike != bool) {
+        console.log("error");
+      }
+      console.log(bool);
+      console.log(this.dairies[index].isLike);
+    }
   },
 };
 </script>

@@ -10,12 +10,12 @@
                 <span class="ui right floated">{{ item.Food }}</span>
               </h2>
               <span class="meta">{{ item.Text }}</span>
-              <button @click="ChangeFavIcon(item.isLike)" class="ui labeled button right floated" tabindex="0" v-if="!item.isLike">
+              <button @click="ChangeFavIcon(item.isLike, index)" class="ui labeled button right floated" tabindex="0" v-if="!item.isLike">
                 <div class="ui button" id="generated-id-1694596057258-19vo88pbi">
                   <i class="heart icon"></i> いいね
                 </div>
               </button>
-              <button @click="ChangeFavIcon(item.isLike)" class="ui labeled button right floated" tabindex="0" v-if="item.isLike">
+              <button @click="ChangeFavIcon(item.isLike, index)" class="ui labeled button right floated" tabindex="0" v-if="item.isLike">
                 <div class="ui red button" id="generated-id-1694596057258-pfvbr7cca">
                   <i class="heart icon"></i> いいね
                 </div>
@@ -93,10 +93,14 @@ export default {
       }
     },
     
-    ChangeFavIcon(i)
+    ChangeFavIcon(bool, index)
     {
-      this.i = !this.i;
-      console.log(i);
+      this.dairies[index].isLike = !this.dairies[index].isLike;
+      if(this.dairies[index].isLike != bool) {
+        console.log("error");
+      }
+      console.log(bool);
+      console.log(this.dairies[index].isLike);
     }
   },
 };
