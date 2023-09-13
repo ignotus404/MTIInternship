@@ -18,6 +18,16 @@ exports.handler = async (event, context) =>
     body: JSON.stringify({ message: "" }),
   };
   
+  if(event.headers.authorization !== "mtitoken")
+  {
+    response.statusCode = 401;
+    response.body = JSON.stringify({
+      message:"ログインしてください"
+    });
+    
+    return response;
+  }
+  
   const UserID = event.queryStringParameters?.UserID;
   let foodId;
   
