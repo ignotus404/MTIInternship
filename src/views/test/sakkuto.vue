@@ -2,7 +2,7 @@
   <div>
     <div class="ui main container">
       
-      <!-- 野菜の画像 -->
+      <!-- 野菜データ -->
       <div class="ui segment">
         <p>テキスト: {{ dairy.text }}</p>
           <TabComponent @tab-selected="handleTabSelection"/>
@@ -10,6 +10,15 @@
       </div>
 
       <!-- レシピをここに表示 -->
+      
+      <div class="ui segment">
+        <p>生: {{  }}</p>
+        <p>カロリー : 30kcal: {{  }}</p>
+        <p>時間 : 1分 {{  }}</p>
+          <TabComponent @tab-selected="handleTabSelection"/>
+        
+      </div>
+      
   
 
     </div>
@@ -19,7 +28,7 @@
 
 <script>
  import { baseUrl } from "@/assets/config.js";
-import TabComponent from '../UnderTab.vue';
+
 
 
 

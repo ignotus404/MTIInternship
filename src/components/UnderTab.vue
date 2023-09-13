@@ -1,55 +1,29 @@
+
 <template>
-  <div class="tab-container">
-    <div
-      v-for="item in tabs"
-      :key="item"
-      class="tab"
-      @click="selectTab(item)"
-    >
-      {{ item }}
-    </div>
+  <div class="ui secondary pointing green inverted massive menu centered-tab">
+    <router-link active-class="active" class="item" exact to="/">Home</router-link>
+    <router-link active-class="active" class="item" to="/user">User</router-link>
+    <router-link active-class="active" class="item" to="/profile">Profile</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      tabs: [
-        { name: "ホーム", path: "/" },
-        { name: "投稿", path: "/post" },
-        { name: "日記", path: "/diary" },
-        { name: "設定", path: "/settings" }
-      ]
-    };
-  },
-  methods: {
-    navigateTo(path) {
-      this.$router.push(path);
-    }
-  }
-};
+  name: 'UnderTab',
+}
 </script>
 
 <style scoped>
-.tab-container {
+.centered-tab {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
-  justify-content: space-between;
-  height: 30px;
-  
+  justify-content: space-around;  /* Distribute items evenly */
 }
 
-.tab {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 10px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.tab:hover {
-  background-color: #ddd;
+.centered-tab .item {
+  color: black;  /* Set text color to black */
 }
 </style>
