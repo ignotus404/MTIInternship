@@ -4,50 +4,67 @@
       
       <!-- 野菜データ -->
       <div class="ui segment">
-        <p>テキスト: {{ dairy.text }}</p>
-          <TabComponent @tab-selected="handleTabSelection"/>
-        
+        <div class="ui grid" @click="toggleCookingMethod">
+            <div class="eight wide column" style="text-align: left;">ユーザーID{{ userId }}</div>
+            <div class="eight wide column" style="text-align: right;">{{ dairy.text }}トマト</div>
+        </div>
+        <TabComponent @tab-selected="handleTabSelection"/>
+        <p v-if="showCookingMethod">調理方法: {{ cookingMethod }}</p>
       </div>
 
-      <!-- レシピをここに表示 -->
-      
-      <div class="ui segment">
-        <p>生: {{  }}</p>
-        <p>カロリー : 30kcal: {{  }}</p>
-        <p>時間 : 1分 {{  }}</p>
-          <TabComponent @tab-selected="handleTabSelection"/>
-        
+      <div class="ui segment" @click="toggleCookingMethod">
+        <p>料理名: {{ recipeName }}</p>
+        <p>カロリー : {{ calories }} kcal</p>
+        <p>時間 : {{ time }} 分</p>
+        <TabComponent @tab-selected="handleTabSelection"/>
+        <p v-if="showCookingMethod">調理方法: {{ cookingMethod }}</p>
+      </div>
+
+      <div class="ui segment" @click="toggleCookingMethod">
+        <p>料理名: {{ recipeName }}</p>
+        <p>カロリー : {{ calories }} kcal</p>
+        <p>時間 : {{ time }} 分</p>
+        <TabComponent @tab-selected="handleTabSelection"/>
+        <p v-if="showCookingMethod">調理方法: {{ cookingMethod }}</p>
+      </div>
+
+      <div class="ui segment" @click="toggleCookingMethod">
+        <p>調理方法: {{ cookingMethod }}</p>
+        <p>カロリー : {{ calories }} kcal</p>
+        <p>時間 : {{ time }} 分</p>
+        <TabComponent @tab-selected="handleTabSelection"/>
       </div>
       
-  
-
     </div>
     <Footer/>
   </div>
 </template>
 
 <script>
- import { baseUrl } from "@/assets/config.js";
+import { baseUrl } from "@/assets/config.js";
 
-
-
-
-  export default {
+export default {
     name: 'Home',
-
     components: {},
-
     data() {
-      // Vue.jsで使う変数はここに記述する
-      return {
-        dairy: {
-          userId: window.localStorage.getItem("userId"),
-          dairyFoodName: null,
-          text: null,
-        },
-      };
+        return {
+            dairy: {
+                userId: window.localStorage.getItem("userId"),
+                dairyFoodName: null,
+                text: null,
+            },
+            showCookingMethod: false,
+            recipeName: 'サンプル料理名',
+            calories: 500,
+            time: 30,
+            cookingMethod: 'ここに調理方法のテキストを追加します。'
+        };
     },
-
+    methods: {
+        toggleCookingMethod() {
+            this.showCookingMethod = !this.showCookingMethod;
+        }
+    },
     computed: {
       // 計算した結果を変数として利用したいときはここに記述する
     },
@@ -78,6 +95,8 @@
 
         this.dairy.dairyFoodName = jsonData.dairyFoodName;
         this.dairy.text = jsonData.text;
+        //this.Cook=jsonData.cookみたいなのがいろいろ入ってくる
+        
       }
       catch (e) {
         console.error(e);
