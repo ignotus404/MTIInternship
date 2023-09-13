@@ -3,9 +3,7 @@ const { DynamoDBClient, GetItemCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
 const UserTable = "team2-user";
-// const FoodTable = "team2-food";
-
-// let foodId;
+const FoodTable = "team2-food";
 
 exports.handler = async (event, context) => 
 {
@@ -21,6 +19,7 @@ exports.handler = async (event, context) =>
   };
   
   const UserID = event.queryStringParameters?.UserID;
+  let foodId;
   
   if(UserID === undefined)
   {
@@ -34,8 +33,8 @@ exports.handler = async (event, context) =>
   
   const UserTableParam = 
   {
-    UserTable,
-    Item: marshall
+    TableName: UserTable,
+    Key: marshall
     ({
       UserID,
     }),
@@ -48,8 +47,18 @@ exports.handler = async (event, context) =>
   try 
   {
     const user = (await client.send(GetUserDataCommand)).Item;
+    foodId = unmarshall(user)?.DairyFoodID;
     
-    response.body = JSON.stringify(unmarshall(user));
+    if(foodId === undefined)
+    {
+      response.body = JSON.stringify
+      ({
+        message:"team2-userから情報が取得できていません"
+      });
+      return response;
+    }
+    
+    
   } 
   catch (e) 
   {
@@ -61,32 +70,39 @@ exports.handler = async (event, context) =>
     });
   }
   
-//   const GetFoodDataCommand = new GetItemCommand(FoodTableParam);
   
-//   const FoodTableParam =
-//   {
-//     FoodTable,
-//     Key: marshall
-//     ({
-//       foodId,      
-//     })
-//   };
   
-//   try 
-//   {
-//     const food = (await client.send(GetFoodDataCommand)).Item;
+  
+  //FoodTableから食材情報を取得
+  const FoodTableParam =
+  {
+    TableName: FoodTable,
+    Key: marshall
+    ({
+      foodId: foodId,
+    }),
+  };
+  
+  console.log(FoodTableParam);
+  
+  const GetFoodDataCommand = new GetItemCommand(FoodTableParam);
+  
+  try 
+  {
+    const food = (await client.send(GetFoodDataCommand)).Item;
     
-//     response.body = JSON.stringify(unmarshall(food));
-//   } 
-//   catch (e) 
-//   {
-//     console.error(e);
-//     response.statusCode = 500;
-//     response.body = JSON.stringify({
-//       message: "食材名取得の時に、予期せぬエラーが発生しました。",
-//       errorDetail: e.toString(),
-//     });
-//   }
+    response.body = JSON.stringify(unmarshall(food));
+  } 
+  
+  catch (e) 
+  {
+    console.error(e);
+    response.statusCode = 500;
+    response.body = JSON.stringify({
+      message: "食材名取得の時に、予期せぬエラーが発生しました。",
+      errorDetail: e.toString(),
+    });
+  }
 
   return response;
 };
