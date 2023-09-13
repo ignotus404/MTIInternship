@@ -2,7 +2,7 @@
 const { DynamoDBClient, ScanCommand } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
-const tableName = "team2-Dialy";
+const DialyTable = "team2-Dialy";
 
 exports.handler = async (event, context) => {
   //レスポンスの雛形
@@ -33,22 +33,25 @@ exports.handler = async (event, context) => {
 
   // リクエストの型
   const param = {
-    tableName,
+    TableName:DialyTable,
     limit:100,
   };
-  console.log("parameters")
-  console.log(param)
+//   console.log("parameters")
+//   console.log(param)
   // データ取得するコマンド
   const command = new ScanCommand(param);
   
+  
   try {
     // データを取得してitemのみを取得
-    const dialy = (await client.send(command));
-
-    response.body = JSON.stringify(unmarshall(dialy));
+    const dialy = (await client.send(command)).Items;
+    console.log(dialy)
+    const unmarshalledUserItems= dialy.map((item) => unmarshall(item));
+    const dialy_db= JSON.stringify(unmarshalledUserItems);
+    response.body=dialy_db
     
-  console.log("diary")
-  console.log(dialy)
+//   console.log("diary")
+//   console.log(dialy)
 
   } 
   // エラーの場合
@@ -61,6 +64,9 @@ exports.handler = async (event, context) => {
     });
     
   }
+  
+  
+  
   
   // レスポンス内容
   return response;
