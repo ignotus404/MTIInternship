@@ -1,11 +1,13 @@
 
 <template>
   <div id="app">
+
     <Header />
     <div class="main-content">
       <router-view/>
     </div>
     <UnderTab/>
+
   </div>
 </template>
 

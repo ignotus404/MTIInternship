@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
+import CreateDiary from '../views/CreateDiary.vue'
 import User from '../views/User.vue'
 import DiaryViewer from '../views/DiaryViewer.vue'
 import UnderTab from '../components/UnderTab.vue'
@@ -37,13 +38,13 @@ const router = createRouter({
         title: 'Profile'
       }
     },
-    // ユーザー一覧画面
+    // 日記投稿画面
     {
-      path: '/user',
-      name: 'User',
-      component: User,
+      path: '/createDairy',
+      name: 'CreateDiary',
+      component: CreateDiary,
       meta: {
-        title: 'User'
+        title: 'CreateDiary'
       }
     },
     //日記一覧画面
