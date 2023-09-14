@@ -120,7 +120,9 @@ export default {
         });
 
         const text = await res.text();
+        console.log(text)
         const jsonData = text ? JSON.parse(text) : {};
+        console.log(jsonData)
 
         if (!res.ok) {
           const errorMessage =
