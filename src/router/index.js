@@ -40,7 +40,26 @@ const router = createRouter({
       name: 'User',
       component: User,
       meta: {
-        title: 'User'
+        title: 'CreateDiary'
+      }
+    },
+    //日記一覧画面
+    {
+      path:'/diaries',
+      name:'diaries',
+      component: DiaryViewer,
+      meta: 
+      {
+        title: 'diaries'
+      }
+    },
+    //下タブ
+    {
+      path: '/undertab',
+      name: 'UnderTab',
+      component: UnderTab,
+      meta: {
+        title: 'UnderTab'
       }
     },
   ]
