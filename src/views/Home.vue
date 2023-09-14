@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="ui main container">
-<<<<<<< HEAD
 
       <!-- 野菜データ -->
       <div class="ui segment" style="background-color: #DFE9EC; border-style: none;">
@@ -99,6 +98,7 @@
     computed: {},
 
     methods: {
+
       toggleCookingMethod0() {
         this.showCookingMethod0 = !this.showCookingMethod0;
       },
@@ -111,6 +111,7 @@
         this.showCookingMethod2 = !this.showCookingMethod2;
       }
     },
+
 
 
     computed: {
