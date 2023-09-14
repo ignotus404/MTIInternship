@@ -1,6 +1,6 @@
 <template>
   <footer class="footer-content">
-    <p><small>Copyright © MTI Ltd. All Rights Reserved.</small></p>
+    <p class="footerP"><small>Copyright © MTI Ltd. All Rights Reserved.</small></p>
   </footer>
 </template>
 
@@ -14,5 +14,10 @@ export default {
 footer {
   background: #dcdcdc;
   padding: 0.5em 0;
+  margin-bottom: 52px;
+}
+
+.footerP {
+  margin-left: 20px;
 }
 </style>

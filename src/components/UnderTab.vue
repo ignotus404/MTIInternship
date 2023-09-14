@@ -1,9 +1,9 @@
 <template>
   <div class="ui pointing massive menu centered inverted" style="background-color: #619077;">
     <div></div>
-    <router-link active-class="active" class="item white" exact to="/">Home</router-link>
-    <router-link active-class="active" class="item" to="/user">User</router-link>
-    <router-link active-class="active" class="item" to="/profile">Profile</router-link>
+    <router-link active-class="active" class="item" exact to="/">Home</router-link>
+    <router-link active-class="active" class="item" to="/createDairy">Post</router-link>
+    <router-link active-class="active" class="item" to="/diaries">Dairy</router-link>
   </div>
 </template>
 

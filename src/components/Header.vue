@@ -3,7 +3,9 @@
 
     <div class="ui sakuijiFrame">
       <!--サービス名-->
-      <router-link active-class="active" class="sakuiji" exact to="/">サクイジ</router-link>
+      <router-link active-class="active" exact to="/">
+        <img :src="sakuiji" alt="sakuiji" class="sakuijiImg" />
+      </router-link>
     </div>
 
     <div class="ui" v-if="isMenuNeeded">
@@ -11,14 +13,18 @@
       <div class="headerBottomFrame">
         <!--保時ポイント-->
         <div class="pointFrame">
-          <i class="plus icon pointIcon"></i>
+          <i class="copyright outline large icon pointIcon"></i>
           <p class="pointText">3000p</p>
         </div>
 
-        <!--通知アイコン-->
+
         <div class="notificationPositon">
-          <!--TODO-->
-          <router-link active-class="active" class="item" to="/createDairy">
+          <!--設定アイコン-->
+          <router-link active-class="active" class="item" to="/">
+            <i class="big cog icon headerNotifition" style="margin-right: 10px;"></i>
+          </router-link>
+          <!--通知アイコン-->
+          <router-link active-class="active" class="item" to="/">
             <i class="big bell outline icon headerNotifition"></i>
           </router-link>
         </div>
@@ -31,18 +37,24 @@
 
 </template>
 <script>
+  import sakuiji from '@/views/image/sakuiji.png';
+
   export default {
     name: 'Header',
 
     components: {},
 
-    data() {},
+    data() {
+      return {
+        sakuiji,
+      };
+    },
 
     computed: {
       // 計算した結果を変数として利用したいときはここに記述する
       isMenuNeeded() {
         return this.$route.name !== 'Login';
-      },
+      }
     },
 
     methods: {},
@@ -57,17 +69,10 @@
     margin-bottom: 30px;
     background-color: #ffffff;
   }
-
-  .sakuijiFrame {
-    margin-bottom: 10px;
-  }
-
-  .sakuiji {
-    font-size: 24px;
-    font-weight: 600;
-    color: #424242;
-    text-align: center;
-    margin: auto 0;
+  
+  .sakuijiImg {
+    width: 120px;
+    margin: 0;
   }
 
   .headerBottomFrame {

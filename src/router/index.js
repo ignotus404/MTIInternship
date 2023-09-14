@@ -56,7 +56,7 @@ const router = createRouter({
       {
         title: 'diaries'
       }
-    }
+    },
     //下タブ
     {
       path: '/undertab',

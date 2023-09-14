@@ -1,32 +1,40 @@
-
 <template>
   <div id="app">
-
-    <Header />
-    <div class="main-content">
-      <router-view/>
+    <div class="content">
+      <Header />
+      <div class="main-content">
+        <router-view />
+      </div>
     </div>
-    <UnderTab/>
+    <Footer />
+    <UnderTab />
 
   </div>
 </template>
 
 <script>
-import { RouterView } from 'vue-router';
-import Header from '@/components/Header.vue';
-import UnderTab from '@/components/UnderTab.vue';
+  import { RouterView } from 'vue-router';
+  import Header from '@/components/Header.vue';
+  import UnderTab from '@/components/UnderTab.vue';
+  import Footer from '@/components/Footer.vue';
 
-export default {
-  name: 'App',
-  components: {
-    Header,
-    UnderTab
-  },
-}
+  export default {
+    name: 'App',
+    components: {
+      Header,
+      UnderTab,
+      Footer
+    },
+  }
 </script>
 
 <style>
-.main-content {
-  padding-bottom: 60px;  /* Adjust this value based on the height of your tab */
-}
+  .main-content {
+    padding-bottom: 60px;
+    /* Adjust this value based on the height of your tab */
+  }
+  
+  .content {
+    min-height: 90.5vh;
+  }
 </style>

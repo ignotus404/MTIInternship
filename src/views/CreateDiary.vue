@@ -12,6 +12,7 @@
           </div>
 
           <input type="file" ref="preview" @change="uploadFile" v-if="!isImgUrl" />
+          <p v-if="isError" style="color: #ff0000; margin-top: 5px;">画像を選択してください</p>
 
           <!--画像表示-->
           <div v-if="isImgUrl">
@@ -52,25 +53,27 @@
 <script>
   // 日記投稿画面
   import { baseUrl } from "@/assets/config.js";
-  
+
   // headerを指定する
   const headers = { Authorization: "mtiToken" };
 
   export default {
     name: 'CreateDiary',
 
-    components: {},
+    components: {
+    },
 
     data() {
       return {
         isImgUrl: false,
         imgUrl: null,
+        isError: false,
         user: {
           userId: "",
           foodName: "",
         },
         diary: {
-          userId: "hogehogeuserId",
+          userId: "RinaKato",
           dairyFoodName: "hogehoge",
           text: "",
         }
@@ -79,6 +82,7 @@
     computed: {},
 
     methods: {
+
       // 写真アップロード
       uploadFile() {
         const file = this.$refs.preview.files[0];
@@ -90,50 +94,55 @@
       switchIsImg() {
         this.isImgUrl = false;
         this.imgUrl = null;
+        this.isError = false;
       },
 
       async createDiary() {
-        // リクエストボディを指定する
-        const requestBody = {
-          userId: this.diary.userId,
-          foodName: this.diary.dairyFoodName,
-          text: this.diary.text,
-        };
-        
-        try {
-          const res = await fetch(baseUrl + "/dairy", {
-            method: "POST",
-            body: JSON.stringify(requestBody),
-            headers,
-          });
-          
-          console.log("レスポンス");
-          console.log(res);
-          
-          // レスポンスを適当な型に変換
-          const text = await res.text();
-          const jsonData = text ? JSON.parse(text) : {};
+        if (this.isImgUrl == true) {
+          // リクエストボディを指定する
+          const requestBody = {
+            userId: this.diary.userId,
+            foodName: this.diary.dairyFoodName,
+            text: this.diary.text,
+          };
 
-          // fetchではネットワークエラー以外のエラーはthrowされないため、明示的にthrowする
-          if (!res.ok) {
-            const errorMessage =
-              jsonData.message ?? "エラーメッセージがありません";
-            throw new Error(errorMessage);
-            console.log("エラーメッセージ");
+          try {
+            const res = await fetch(baseUrl + "/dairy", {
+              method: "POST",
+              body: JSON.stringify(requestBody),
+              headers,
+            });
+
+            console.log("レスポンス");
+            console.log(res);
+
+            // レスポンスを適当な型に変換
+            const text = await res.text();
+            const jsonData = text ? JSON.parse(text) : {};
+
+            // fetchではネットワークエラー以外のエラーはthrowされないため、明示的にthrowする
+            if (!res.ok) {
+              const errorMessage =
+                jsonData.message ?? "エラーメッセージがありません";
+              throw new Error(errorMessage);
+              console.log("エラーメッセージ");
+            }
+
+            // 成功時の処理
+            console.log("レスポンス2");
+            console.log(jsonData);
+
+            // 日記一覧画面に遷移
+            this.$router.push({ name: 'diaries' });
+            console.log("最後");
           }
-
-          // 成功時の処理
-          console.log("レスポンス2");
-          console.log(jsonData);
-
-          // 日記一覧画面に遷移
-          this.$router.push({ name: 'Home' });
-          console.log("最後");
-        }
-        catch (e) {
-          console.log("エラー");
-          console.error(e);
-          // エラー時の処理
+          catch (e) {
+            console.log("エラー");
+            console.error(e);
+            // エラー時の処理
+          }
+        } else {
+          this.isError = true;
         }
       },
     },
