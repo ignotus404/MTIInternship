@@ -1,23 +1,23 @@
 
 <template>
   <div id="app">
-    <Menu />
-    <div class="main-content">
-      <router-view/>
-    </div>
+
+    <Header />
+    <router-view/>
     <UnderTab/>
+
   </div>
 </template>
 
 <script>
 import { RouterView } from 'vue-router';
-import Menu from '@/components/Menu.vue';
+import Header from '@/components/Header.vue';
 import UnderTab from '@/components/UnderTab.vue';
 
 export default {
   name: 'App',
   components: {
-    Menu,
+    Header,
     UnderTab
   },
 }
