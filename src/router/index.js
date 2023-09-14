@@ -38,11 +38,11 @@ const router = createRouter({
         title: 'Profile'
       }
     },
-    // 日記投稿画面
+    // ユーザー一覧画面
     {
-      path: '/createDairy',
-      name: 'CreateDiary',
-      component: CreateDiary,
+      path: '/user',
+      name: 'User',
+      component: User,
       meta: {
         title: 'CreateDiary'
       }
