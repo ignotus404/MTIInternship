@@ -3,7 +3,9 @@
   <div id="app">
 
     <Header />
-    <router-view/>
+    <div class="main-content">
+      <router-view/>
+    </div>
     <UnderTab/>
 
   </div>
