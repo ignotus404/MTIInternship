@@ -26,12 +26,35 @@
               <input type="text" placeholder="Nickname" v-model="user.nickname">
             </div>
           </div>
-          <!--Age 入力欄-->
+          <!--age 入力欄-->
           <div rounded class="ui formField" v-if="!isLogin">
             <div class="ui left icon input">
               <i class="calendar icon"></i>
               <input type="text" placeholder="Age" v-model.number="user.age">
             </div>
+          </div>
+          <!--weight 入力欄-->
+          <div rounded class="ui formField" v-if="!isLogin">
+            <div class="ui left icon input">
+              <i class="child icon"></i>
+              <input type="text" placeholder="Wight" v-model.number="user.weight">
+            </div>
+          </div>
+          <!--weight 入力欄-->
+          <div rounded class="ui formField dislikeFood" v-if="!isLogin">
+            <!--<div class="ui left icon input">-->
+              <!--<i class="thumbs down icon"></i>-->
+            <!--<div>-->
+            <p>苦手な食べ物</p>
+              <div v-for="(item, index) in items" :key="index">
+                <div class="ui checkbox">
+                  <input type="checkbox" v-model="item.checked" /> <!-- チェックボックス -->
+                  <label>{{item.text}}</label>  <!-- テキストボックス -->
+                </div>
+              </div>
+                <!--もち麦、赤みの肉、魚、トマト、玉ねぎ、海藻類、きのこ類、大豆製品、チーズ、梅干し、グレープフルーツ、アーモンド、しょうが、ニンニク-->
+              <!--</div>-->
+            <!--</div>-->
           </div>
           <!--新規登録ボタン-->
           <button class="ui huge green button" type="submit">
@@ -74,6 +97,22 @@
           nickname: null,
           age: null,
         },
+        items: [
+          { text: "赤みの肉", checked: false },
+          { text: "魚", checked: false },
+          { text: "トマト", checked: false },
+          { text: "玉ねぎ", checked: false },
+          { text: "海藻類", checked: false },
+          { text: "きのこ類", checked: false },
+          { text: "大豆製品", checked: false },
+          { text: "チーズ", checked: false },
+          { text: "梅干し", checked: false },
+          { text: "グレープフルーツ", checked: false },
+          { text: "アーモンド", checked: false },
+          { text: "しょうが", checked: false },
+          { text: "ニンニク", checked: false },
+          // 他のアイテム
+        ],
       };
     },
 
@@ -107,7 +146,7 @@
 
           try {
             /* global fetch */
-            const res = await fetch(baseUrl + "/user/login", {
+            const res = await fetch(baseUrl + "/login", {
               method: "POST",
               body: JSON.stringify(requestBody),
               headers,
@@ -200,4 +239,14 @@
 
 <style scoped>
   /* このコンポーネントだけに適用するCSSはここに記述する */
+  .dislikeFood label{
+    margin-right:10px;
+    white-space: nowrap;
+    
+  }
+  .dislikeFood div{
+    white-space: nowrap;
+    display:inline;
+    margin:10px;
+  }
 </style>

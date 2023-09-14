@@ -1,2 +1,2 @@
 // 自分のAPI
-export const baseUrl = 'https://mna56g8sl1.execute-api.ap-northeast-1.amazonaws.com';
+export const baseUrl = 'https://8rs09dq9dl.execute-api.ap-northeast-1.amazonaws.com';

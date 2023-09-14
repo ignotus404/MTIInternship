@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="ui main container">
+<<<<<<< HEAD
 
       <!-- 野菜データ -->
       <div class="ui segment" style="background-color: #DFE9EC; border-style: none;">
@@ -64,7 +65,9 @@
 
   export default {
     name: 'Home',
+
     components: {},
+
     data() {
       return {
         user: {
@@ -93,6 +96,8 @@
         cookingMethod2: 'ブロッコリーは小房に分け、ブロッコリーの茎の部分は乱切りにし、別々のの耐熱容器に入れる。ふんわりとラップをかけ、レンジ（６００W）で約２分ずつ加熱し、水気を切る。フライパンにＡを合わせて弱火にかけ、にんにくと赤唐辛子がきつね色になったら一度取り出す。フライパンを中火にかけ、①を入れて炒め、ドレッシングを加えてからめ合わせる.器に③を盛りつけ、②を散らす。'
       };
     },
+    computed: {},
+
     methods: {
       toggleCookingMethod0() {
         this.showCookingMethod0 = !this.showCookingMethod0;

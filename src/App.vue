@@ -8,7 +8,6 @@
     </div>
     <Footer />
     <UnderTab />
-
   </div>
 </template>
 
