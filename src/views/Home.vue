@@ -40,12 +40,14 @@
         <p v-if="showCookingMethod2">調理方法: {{ cookingMethod2 }}</p>
       </div>
       
+
     </div>
     <Footer/>
   </div>
 </template>
 
 <script>
+
 import { baseUrl } from "../assets/config.js";
 import vegetableImage from '@/views/image/broccoli.png';
 import vegetableImage0 from '@/views/image/broccoli0.png';
@@ -169,4 +171,5 @@ export default {
 }
 
 </style>
+
 
